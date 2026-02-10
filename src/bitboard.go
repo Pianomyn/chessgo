@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 type Bitboard uint64
 
@@ -10,19 +13,19 @@ const (
 )
 
 func (b Bitboard) String() string {
-	var s string
+	var sb strings.Builder
 	for rank := 7; rank >= 0; rank-- {
 		for file := 0; file < 8; file++ {
 			square := rank*8 + file
 			if (b>>square)&1 == 1 {
-				s += "X "
+				sb.WriteString("X ")
 			} else {
-				s += ". "
+				sb.WriteString(". ")
 			}
 		}
-		s += "\n"
+		sb.WriteString("\n")
 	}
-	return s
+	return sb.String()
 }
 
 func printBitboards() {
