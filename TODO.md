@@ -1,1 +1,2 @@
-- NewChessBoard and Sync tests
+- Enum for squares instead of uint
+- Move Gen

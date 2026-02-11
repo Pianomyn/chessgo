@@ -6,6 +6,7 @@ import (
 )
 
 type Bitboard uint64
+type Square uint8
 
 const (
 	EmptyBitboard Bitboard = 0
@@ -28,15 +29,15 @@ func (b *Bitboard) String() string {
 	return sb.String()
 }
 
-func (b *Bitboard) Set(square int) {
+func (b *Bitboard) Set(square Square) {
 	*b |= (1 << square)
 }
 
-func (b *Bitboard) Clear(square int) {
+func (b *Bitboard) Clear(square Square) {
 	*b &= ^(1 << square)
 }
 
-func (b *Bitboard) Get(square int) bool {
+func (b *Bitboard) Get(square Square) bool {
 	return (*b>>square)&1 == 1
 }
 

@@ -1,6 +1,7 @@
 package main
 
 type Colour uint8
+type Piece uint8
 
 const (
 	White Colour = iota
@@ -8,7 +9,7 @@ const (
 )
 
 const (
-	Pawn uint8 = iota
+	Pawn Piece = iota
 	Knight
 	Bishop
 	Rook
@@ -32,8 +33,9 @@ func NewChessBoard() *ChessBoard {
 
 	// Pawns
 	for i := 0; i < 8; i++ {
-		cb.Pieces[White][Pawn].Set(8 + i)  // Rank 2
-		cb.Pieces[Black][Pawn].Set(48 + i) // Rank 7
+		offset := Square(i)
+		cb.Pieces[White][Pawn].Set(8 + offset)
+		cb.Pieces[Black][Pawn].Set(48 + offset)
 	}
 
 	// Knights
@@ -67,6 +69,8 @@ func NewChessBoard() *ChessBoard {
 }
 
 func (cb *ChessBoard) Sync() {
+	cb.Colours[White] = 0
+	cb.Colours[Black] = 0
 	for i := range 6 {
 		cb.Colours[White] |= cb.Pieces[White][i]
 		cb.Colours[Black] |= cb.Pieces[Black][i]

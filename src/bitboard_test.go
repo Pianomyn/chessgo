@@ -7,7 +7,7 @@ import (
 func TestBitboardManipulation(t *testing.T) {
 	cases := []struct {
 		name   string
-		square int
+		square Square
 	}{
 		{"a1", 0},
 		{"h1", 7},
