@@ -1,2 +1,3 @@
-- Enum for squares instead of uint
+- Directions
+    - Algebraic notation iota for squares instead of uint
 - Move Gen
