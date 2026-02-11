@@ -1,9 +1,9 @@
 - Move gen of pseudo legal moves
-  - Masks (Out of bounds)
   - Attack Tables + Move Tables
+    - Generate with masks to handle out of bounds
     - Knight + King -> AttackTable & !Friendly
-    - Pawn -> Separate tables, Promotions
-    - Bishop, Rook, Queen -> Rays or Magic Bitboards. Prob rays
+    - Pawn -> Attack table, Move logic + Promotions handled with logic
+    - Bishop, Rook, Queen -> Rays or Magic Bitboards or Kogge-Stone?. Prob rays
       - Bitboard arr of arras for each square and direction. 64 x 8
       - Each bitboard is bitboard of valid moves in dir
         - Directions
@@ -18,9 +18,15 @@
         - Find Highest Set Bit	63 - bits.LeadingZeros64(x) // South and West
 
 - Legal moves + special rules
-  - pseudolegal move that puts king into check is invalid
+  - If king is actively in check, use checkmask to find valid moves (block, take). If double check, checkmask is 0
+  - Pseudolegal move that puts king into check is invalid
     - If king moves, check Knight Attack Table + Rays to see if enemy pieces can be reached
-    - If friendly piece that has ray to king moves (pin)
+    - If friendly piece that has ray to king moves (pinmask)
       - Check if king has ray to enemy bishop, rook or queen
+  - Legal move is pseudomoves & checkmask & pinmask
   - Castling
   - En Passant
+
+
+- Optimizations
+  - Check Set, Get, Clear are inlined `go build -gcflags="-m" main.go`
