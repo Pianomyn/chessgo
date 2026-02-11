@@ -14,44 +14,44 @@ func TestNewChessBoard(t *testing.T) {
 
 	for i := range 8 {
 		offset := Square(i)
-		if !cb.Pieces[White][Pawn].Get(8 + offset) {
+		if !cb.Pieces[White][Pawn].Get(A2 + offset) {
 			t.Error("White pawns have not been placed correctly")
 		}
-		if !cb.Pieces[Black][Pawn].Get(48 + offset) {
+		if !cb.Pieces[Black][Pawn].Get(A7 + offset) {
 			t.Error("Black pawns have not been placed correctly")
 		}
 	}
 
 	initialPositions := []struct {
-		colour   Colour
+		colour   Side
 		piece    Piece
 		position Square
 	}{
 		// Knights
-		{White, Knight, 1},
-		{White, Knight, 6},
-		{Black, Knight, 57},
-		{Black, Knight, 62},
+		{White, Knight, B1},
+		{White, Knight, G1},
+		{Black, Knight, B8},
+		{Black, Knight, G8},
 
 		// Bishops
-		{White, Bishop, 2},
-		{White, Bishop, 5},
-		{Black, Bishop, 58},
-		{Black, Bishop, 61},
+		{White, Bishop, C1},
+		{White, Bishop, F1},
+		{Black, Bishop, C8},
+		{Black, Bishop, F8},
 
 		// Rooks
-		{White, Rook, 0},
-		{White, Rook, 7},
-		{Black, Rook, 56},
-		{Black, Rook, 63},
+		{White, Rook, A1},
+		{White, Rook, H1},
+		{Black, Rook, A8},
+		{Black, Rook, H8},
 
 		// Rooks
-		{White, Queen, 3},
-		{Black, Queen, 59},
+		{White, Queen, D1},
+		{Black, Queen, D8},
 
 		// Rooks
-		{White, King, 4},
-		{Black, King, 60},
+		{White, King, E1},
+		{Black, King, E8},
 	}
 
 	for _, c := range initialPositions {
@@ -65,26 +65,26 @@ func TestNewChessBoard(t *testing.T) {
 
 func TestSyncBasic(t *testing.T) {
 	cb := &ChessBoard{}
-	cb.Pieces[White][Rook] = cb.Pieces[White][Rook].Clear(0)
-	cb.Pieces[White][Rook] = cb.Pieces[White][Rook].Set(16)
-	cb.Pieces[Black][Queen] = cb.Pieces[Black][Queen].Clear(63)
-	cb.Pieces[Black][Queen] = cb.Pieces[Black][Queen].Set(63)
+	cb.Pieces[White][Rook] = cb.Pieces[White][Rook].Clear(A1)
+	cb.Pieces[White][Rook] = cb.Pieces[White][Rook].Set(A3)
+	cb.Pieces[Black][Queen] = cb.Pieces[Black][Queen].Clear(H8)
+	cb.Pieces[Black][Queen] = cb.Pieces[Black][Queen].Set(H8)
 
 	cb.Sync()
 
-	if cb.Colours[White].Get(0) {
+	if cb.Colours[White].Get(A1) {
 		t.Errorf("White colour bitboard didn't clear rook")
 	}
-	if !cb.Colours[White].Get(16) {
+	if !cb.Colours[White].Get(A3) {
 		t.Errorf("White colour bitboard didn't place rook")
 	}
-	if !cb.Colours[Black].Get(63) {
+	if !cb.Colours[Black].Get(H8) {
 		t.Errorf("Black colour bitboard missing queen square")
 	}
-	if cb.Occupied.Get(0) || !cb.Occupied.Get(16) || !cb.Occupied.Get(63) {
+	if cb.Occupied.Get(A1) || !cb.Occupied.Get(A3) || !cb.Occupied.Get(H8) {
 		t.Errorf("Occupied bitboard incorrect")
 	}
-	if !cb.Empty.Get(0) || cb.Empty.Get(16) || cb.Empty.Get(63) {
+	if !cb.Empty.Get(A1) || cb.Empty.Get(A3) || cb.Empty.Get(H8) {
 		t.Errorf("Empty bitboard incorrect")
 	}
 }

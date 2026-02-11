@@ -1,3 +1,26 @@
-- Directions
-    - Algebraic notation iota for squares instead of uint
-- Move Gen
+- Move gen of pseudo legal moves
+  - Masks (Out of bounds)
+  - Attack Tables + Move Tables
+    - Knight + King -> AttackTable & !Friendly
+    - Pawn -> Separate tables, Promotions
+    - Bishop, Rook, Queen -> Rays or Magic Bitboards. Prob rays
+      - Bitboard arr of arras for each square and direction. 64 x 8
+      - Each bitboard is bitboard of valid moves in dir
+        - Directions
+          - +8 (<<8) north
+          - -8 (>>8) south
+          - +1 (<<1) east
+          - -1 (>>1) west
+          - +9 (<<9) northeast
+          - ...
+      - Do bitscan to find first obstacle (friendly or enemy+1)
+        - Find Lowest Set Bit	bits.TrailingZeros64(x)	// North and East
+        - Find Highest Set Bit	63 - bits.LeadingZeros64(x) // South and West
+
+- Legal moves + special rules
+  - pseudolegal move that puts king into check is invalid
+    - If king moves, check Knight Attack Table + Rays to see if enemy pieces can be reached
+    - If friendly piece that has ray to king moves (pin)
+      - Check if king has ray to enemy bishop, rook or queen
+  - Castling
+  - En Passant
