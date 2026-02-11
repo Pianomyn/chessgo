@@ -65,10 +65,10 @@ func TestNewChessBoard(t *testing.T) {
 
 func TestSyncBasic(t *testing.T) {
 	cb := &ChessBoard{}
-	cb.Pieces[White][Rook].Clear(0)
-	cb.Pieces[White][Rook].Set(16)
-	cb.Pieces[Black][Rook].Clear(63)
-	cb.Pieces[Black][Queen].Set(63)
+	cb.Pieces[White][Rook] = cb.Pieces[White][Rook].Clear(0)
+	cb.Pieces[White][Rook] = cb.Pieces[White][Rook].Set(16)
+	cb.Pieces[Black][Queen] = cb.Pieces[Black][Queen].Clear(63)
+	cb.Pieces[Black][Queen] = cb.Pieces[Black][Queen].Set(63)
 
 	cb.Sync()
 

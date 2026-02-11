@@ -31,38 +31,32 @@ func NewChessBoard() *ChessBoard {
 		SideToMove: White,
 	}
 
-	// Pawns
+	// Pawns: Using the functional assignment style
 	for i := 0; i < 8; i++ {
 		offset := Square(i)
-		cb.Pieces[White][Pawn].Set(8 + offset)
-		cb.Pieces[Black][Pawn].Set(48 + offset)
+		cb.Pieces[White][Pawn] = cb.Pieces[White][Pawn].Set(8 + offset)
+		cb.Pieces[Black][Pawn] = cb.Pieces[Black][Pawn].Set(48 + offset)
 	}
 
 	// Knights
-	cb.Pieces[White][Knight].Set(1)
-	cb.Pieces[White][Knight].Set(6)
-	cb.Pieces[Black][Knight].Set(57)
-	cb.Pieces[Black][Knight].Set(62)
+	cb.Pieces[White][Knight] = cb.Pieces[White][Knight].Set(1).Set(6)
+	cb.Pieces[Black][Knight] = cb.Pieces[Black][Knight].Set(57).Set(62)
 
 	// Bishops
-	cb.Pieces[White][Bishop].Set(2)
-	cb.Pieces[White][Bishop].Set(5)
-	cb.Pieces[Black][Bishop].Set(58)
-	cb.Pieces[Black][Bishop].Set(61)
+	cb.Pieces[White][Bishop] = cb.Pieces[White][Bishop].Set(2).Set(5)
+	cb.Pieces[Black][Bishop] = cb.Pieces[Black][Bishop].Set(58).Set(61)
 
 	// Rooks
-	cb.Pieces[White][Rook].Set(0)
-	cb.Pieces[White][Rook].Set(7)
-	cb.Pieces[Black][Rook].Set(56)
-	cb.Pieces[Black][Rook].Set(63)
+	cb.Pieces[White][Rook] = cb.Pieces[White][Rook].Set(0).Set(7)
+	cb.Pieces[Black][Rook] = cb.Pieces[Black][Rook].Set(56).Set(63)
 
 	// Queens
-	cb.Pieces[White][Queen].Set(3)
-	cb.Pieces[Black][Queen].Set(59)
+	cb.Pieces[White][Queen] = cb.Pieces[White][Queen].Set(3)
+	cb.Pieces[Black][Queen] = cb.Pieces[Black][Queen].Set(59)
 
 	// Kings
-	cb.Pieces[White][King].Set(4)
-	cb.Pieces[Black][King].Set(60)
+	cb.Pieces[White][King] = cb.Pieces[White][King].Set(4)
+	cb.Pieces[Black][King] = cb.Pieces[Black][King].Set(60)
 
 	cb.Sync()
 	return cb

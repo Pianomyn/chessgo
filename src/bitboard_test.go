@@ -20,12 +20,12 @@ func TestBitboardManipulation(t *testing.T) {
 		t.Run(c.name, func(t *testing.T) {
 			var bb Bitboard
 
-			bb.Set(c.square)
+			bb = bb.Set(c.square)
 			if !bb.Get(c.square) {
 				t.Errorf("%s bit not set\n", c.name)
 			}
 
-			bb.Clear(c.square)
+			bb = bb.Clear(c.square)
 			if bb.Get(c.square) {
 				t.Errorf("%s bit not cleared\n", c.name)
 			}

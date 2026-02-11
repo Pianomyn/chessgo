@@ -13,12 +13,12 @@ const (
 	FullBitboard           = ^EmptyBitboard
 )
 
-func (b *Bitboard) String() string {
+func (b Bitboard) String() string {
 	var sb strings.Builder
 	for rank := 7; rank >= 0; rank-- {
-		for file := 0; file < 8; file++ {
-			square := rank*8 + file
-			if (*b>>square)&1 == 1 {
+		for file := range 8 {
+			square := Square(rank*8 + file)
+			if b.Get(square) {
 				sb.WriteString("X ")
 			} else {
 				sb.WriteString(". ")
@@ -29,16 +29,16 @@ func (b *Bitboard) String() string {
 	return sb.String()
 }
 
-func (b *Bitboard) Set(square Square) {
-	*b |= (1 << square)
+func (b Bitboard) Set(square Square) Bitboard {
+	return b | (1 << square)
 }
 
-func (b *Bitboard) Clear(square Square) {
-	*b &= ^(1 << square)
+func (b Bitboard) Clear(square Square) Bitboard {
+	return b & ^(1 << square)
 }
 
-func (b *Bitboard) Get(square Square) bool {
-	return (*b>>square)&1 == 1
+func (b Bitboard) Get(square Square) bool {
+	return (b>>square)&1 == 1
 }
 
 func printBitboards() {
