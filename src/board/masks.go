@@ -1,4 +1,4 @@
-package main
+package board
 
 // /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Prevent Wrap arounds
@@ -23,6 +23,8 @@ const (
 )
 
 const (
+	NotFileAMask  = ^FileAMask
+	NotFileHMask  = ^FileHMask
 	NotFileABMask = ^(FileAMask | FileBMask)
 	NotFileGHMask = ^(FileGMask | FileHMask)
 )

@@ -1,4 +1,4 @@
-package main
+package board
 
 type Side uint8
 type Piece uint8

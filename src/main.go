@@ -1,10 +1,11 @@
 package main
 
 import (
+	"chessgo/movement"
 	"fmt"
 )
 
 func main() {
-	printBitboards()
+	movement.PrintAllKnightMoves()
 	fmt.Println("Finished!")
 }
