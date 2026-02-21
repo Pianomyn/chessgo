@@ -1,7 +1,7 @@
 package movement
 
 import (
-	"chessgo/board"
+	"math/bits"
 	"testing"
 )
 
@@ -21,18 +21,9 @@ func TestKnightAttackCounts(t *testing.T) {
 	}
 
 	for _, tt := range tests {
-		got := countSetBits(table[tt.square])
+		got := bits.OnesCount64(uint64(table[tt.square]))
 		if got != tt.expected {
 			t.Errorf("%s: expected %d attacks, got %d", tt.name, tt.expected, got)
 		}
 	}
-}
-
-func countSetBits(b board.Bitboard) int {
-	count := 0
-	for b != 0 {
-		b &= (b - 1)
-		count++
-	}
-	return count
 }
