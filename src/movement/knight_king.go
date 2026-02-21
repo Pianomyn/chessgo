@@ -38,9 +38,9 @@ func CreateKnightAttackTable() []board.Bitboard {
 }
 
 func PrintAllKnightMoves() {
-	bb := CreateKnightAttackTable()
-	for i, square := range bb {
-		PrintKnightMoves(board.Square(i), square)
+	allMoves := CreateKnightAttackTable()
+	for i, bb := range allMoves {
+		PrintKnightMoves(board.Square(i), bb)
 	}
 }
 
