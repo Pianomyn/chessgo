@@ -1,3 +1,7 @@
+- Board representation
+  - Matrix
+  - Bitboard
+  - Magic bitboards? (Didn't understand)
 - Move gen of pseudo legal moves
   - Attack Tables + Move Tables
     - Generate with masks to handle out of bounds
