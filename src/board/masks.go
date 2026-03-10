@@ -27,6 +27,8 @@ const (
 	NotFileHMask  = ^FileHMask
 	NotFileABMask = ^(FileAMask | FileBMask)
 	NotFileGHMask = ^(FileGMask | FileHMask)
+	NotRank1Mask  = ^Rank1Mask
+	NotRank8Mask  = ^Rank8Mask
 )
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

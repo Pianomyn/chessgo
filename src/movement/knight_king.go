@@ -37,14 +37,36 @@ func CreateKnightAttackTable() []board.Bitboard {
 	return knightAttacks
 }
 
-func PrintAllKnightMoves() {
-	allMoves := CreateKnightAttackTable()
-	for i, bb := range allMoves {
-		PrintKnightMoves(board.Square(i), bb)
+const (
+	N  int8 = 8
+	NE int8 = 9
+	E  int8 = 1
+	SE int8 = -7
+	S  int8 = -8
+	SW int8 = -9
+	W  int8 = -1
+	NW int8 = 7
+)
+
+func CreateKingAttackTable() []board.Bitboard {
+	kingAttacks := make([]board.Bitboard, 64)
+	for i := range kingAttacks {
+		bit := board.Bitboard(1) << i
+
+		kingAttacks[i] |= (bit & board.NotRank8Mask) << (N)
+		kingAttacks[i] |= (bit & board.NotFileHMask & board.NotRank8Mask) << (NE)
+		kingAttacks[i] |= (bit & board.NotFileHMask) << (E)
+		kingAttacks[i] |= (bit & board.NotFileHMask & board.NotRank1Mask) >> (-SE)
+		kingAttacks[i] |= (bit & board.NotRank1Mask) >> (-S)
+		kingAttacks[i] |= (bit & board.NotFileAMask & board.NotRank1Mask) >> (-SW)
+		kingAttacks[i] |= (bit & board.NotFileAMask) >> (-W)
+		kingAttacks[i] |= (bit & board.NotFileAMask & board.NotRank8Mask) << (NW)
 	}
+
+	return kingAttacks
 }
 
-func PrintKnightMoves(sourceSquare board.Square, bb board.Bitboard) {
+func PrintMoves(sourceSquare board.Square, bb board.Bitboard) {
 	fmt.Println("  +-----------------+")
 	for r := 7; r >= 0; r-- {
 		fmt.Printf("%d | ", r+1) // Rank number
@@ -52,7 +74,7 @@ func PrintKnightMoves(sourceSquare board.Square, bb board.Bitboard) {
 			sq := board.Square(r*8 + f)
 
 			if sq == sourceSquare {
-				fmt.Print("N ")
+				fmt.Print("O ")
 				continue
 			}
 
@@ -66,4 +88,19 @@ func PrintKnightMoves(sourceSquare board.Square, bb board.Bitboard) {
 	}
 	fmt.Println("  +-----------------+")
 	fmt.Println("    a b c d e f g h")
+}
+
+func PrintAllMoves(piece board.Piece) {
+	var allMoves []board.Bitboard
+	switch piece {
+	case board.King:
+		allMoves = CreateKingAttackTable()
+	case board.Knight:
+		allMoves = CreateKnightAttackTable()
+	default:
+		panic("Invalid Piece")
+	}
+	for i, bb := range allMoves {
+		PrintMoves(board.Square(i), bb)
+	}
 }
