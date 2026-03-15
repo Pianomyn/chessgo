@@ -1,0 +1,1 @@
+- 15/03/26: LLM suggested rook ray generations could wrap around like king/knight
