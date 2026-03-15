@@ -2,32 +2,31 @@ package movement
 
 import (
 	"chessgo/board"
-	"math/bits"
 	"testing"
 )
 
-func TestKingAttackCounts(t *testing.T) {
-	table := GetKingMoves()
+func TestRookMovement(t *testing.T) {
+	table := GetRookMoves()
 	tests := []struct {
 		name     string
-		square   int
-		expected int
+		square   board.Square
+		expected board.Bitboard
 	}{
 
-		{"Corner (a1)", 0, 3},
-		{"Edge (a2)", 8, 5},
-		{"Center (d4)", 27, 8},
+		{"a1", board.A1, (board.FileAMask | board.Rank1Mask).Clear(board.A1)},
+		{"a2", board.A2, (board.FileAMask | board.Rank2Mask).Clear(board.A2)},
+		{"b2", board.B2, (board.FileBMask | board.Rank2Mask).Clear(board.B2)},
+		{"d4", board.D4, (board.FileDMask | board.Rank4Mask).Clear(board.D4)},
 	}
 
 	for _, tt := range tests {
-		got := bits.OnesCount64(uint64(table[tt.square]))
-		if got != tt.expected {
-			t.Errorf("%s: expected %d attacks, got %d", tt.name, tt.expected, got)
+		if table[tt.square] != tt.expected {
+			t.Errorf("%s: Mismatch between expected and actual bitboard", tt.name)
 		}
 	}
 }
 
-func TestKingWrapArounds(t *testing.T) {
+func TestRookWrapArounds(t *testing.T) {
 	table := GetKingMoves()
 
 	tests := []struct {

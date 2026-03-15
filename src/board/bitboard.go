@@ -23,7 +23,7 @@ func (b Bitboard) Set(square Square) Bitboard {
 }
 
 func (b Bitboard) Clear(square Square) Bitboard {
-	return b & ^(1 << square)
+	return b &^ (Bitboard(1) << square)
 }
 
 func (b Bitboard) Get(square Square) bool {

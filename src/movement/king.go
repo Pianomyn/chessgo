@@ -13,7 +13,7 @@ const (
 	NW int8 = 7
 )
 
-func CreateKingAttackTable() []board.Bitboard {
+func GetKingMoves() []board.Bitboard {
 	kingAttacks := make([]board.Bitboard, 64)
 	for i := range kingAttacks {
 		bit := board.Bitboard(1) << i

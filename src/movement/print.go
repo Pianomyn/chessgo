@@ -34,9 +34,11 @@ func PrintAllMoves(piece board.Piece) {
 	var allMoves []board.Bitboard
 	switch piece {
 	case board.King:
-		allMoves = CreateKingAttackTable()
+		allMoves = GetKingMoves()
 	case board.Knight:
-		allMoves = CreateKnightAttackTable()
+		allMoves = GetKnightMoves()
+	case board.Rook:
+		allMoves = GetRookMoves()
 	default:
 		panic("Invalid Piece")
 	}

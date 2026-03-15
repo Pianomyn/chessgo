@@ -13,7 +13,7 @@ const (
 	SoSoEa int8 = -15
 )
 
-func CreateKnightAttackTable() []board.Bitboard {
+func GetKnightMoves() []board.Bitboard {
 	knightAttacks := make([]board.Bitboard, 64)
 	for i := range knightAttacks {
 		bit := board.Bitboard(1) << i
