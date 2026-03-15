@@ -1,16 +1,7 @@
 package movement
 
-import "chessgo/board"
-
-const (
-	N  int8 = 8
-	NE int8 = 9
-	E  int8 = 1
-	SE int8 = -7
-	S  int8 = -8
-	SW int8 = -9
-	W  int8 = -1
-	NW int8 = 7
+import (
+	"chessgo/board"
 )
 
 func GetKingMoves() []board.Bitboard {

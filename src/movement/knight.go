@@ -2,17 +2,6 @@ package movement
 
 import "chessgo/board"
 
-const (
-	NoWeWe int8 = 6
-	NoNoWe int8 = 15
-	NoEaEa int8 = 10
-	NoNoEa int8 = 17
-	SoWeWe int8 = -10
-	SoSoWe int8 = -17
-	SoEaEa int8 = -6
-	SoSoEa int8 = -15
-)
-
 func GetKnightMoves() []board.Bitboard {
 	knightAttacks := make([]board.Bitboard, 64)
 	for i := range knightAttacks {
