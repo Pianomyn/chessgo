@@ -11,14 +11,14 @@ func TestKnightAttackCounts(t *testing.T) {
 
 	tests := []struct {
 		name     string
-		square   int
+		square   board.Square
 		expected int
 	}{
-		{"Corner (a1)", 0, 2},
-		{"Edge (a2)", 8, 3},
-		{"Near Edge (b2)", 9, 4},
-		{"Outer Ring (c2)", 10, 6},
-		{"Center (d4)", 27, 8},
+		{"Corner (a1)", board.A1, 2},
+		{"Edge (a2)", board.A2, 3},
+		{"Near Edge (b2)", board.B2, 4},
+		{"Outer Ring (c2)", board.C2, 6},
+		{"Center (d4)", board.D4, 8},
 	}
 
 	for _, tt := range tests {
@@ -34,13 +34,13 @@ func TestKnightWrapArounds(t *testing.T) {
 
 	tests := []struct {
 		name           string
-		square         int
+		square         board.Square
 		forbiddenMasks board.Bitboard
 	}{
-		{"a1", 0, board.FileGMask | board.FileHMask},
-		{"b1", 1, board.FileHMask},
-		{"h8", 63, board.FileAMask | board.FileBMask},
-		{"g8", 62, board.FileAMask},
+		{"a1", board.A1, board.FileGMask | board.FileHMask},
+		{"b1", board.B1, board.FileHMask},
+		{"h8", board.H8, board.FileAMask | board.FileBMask},
+		{"g8", board.G8, board.FileAMask},
 	}
 
 	for _, tt := range tests {

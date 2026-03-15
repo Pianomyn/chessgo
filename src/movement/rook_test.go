@@ -2,6 +2,7 @@ package movement
 
 import (
 	"chessgo/board"
+	"math/bits"
 	"testing"
 )
 
@@ -23,27 +24,8 @@ func TestRookMovement(t *testing.T) {
 		if table[tt.square] != tt.expected {
 			t.Errorf("%s: Mismatch between expected and actual bitboard", tt.name)
 		}
-	}
-}
-
-func TestRookWrapArounds(t *testing.T) {
-	table := GetKingMoves()
-
-	tests := []struct {
-		name           string
-		square         int
-		forbiddenMasks board.Bitboard
-	}{
-		{"a1", 0, board.FileHMask},
-		{"a4", 24, board.FileHMask},
-		{"h1", 7, board.FileAMask},
-		{"h8", 63, board.FileAMask},
-	}
-
-	for _, tt := range tests {
-		illegalMoves := table[tt.square] & tt.forbiddenMasks
-		if illegalMoves != 0 {
-			t.Errorf("%s (square %d): detected wrap-around.", tt.name, tt.square)
+		if bits.OnesCount64(uint64(table[tt.square])) != 14 {
+			t.Errorf("%s: Number of set bits was not 14", tt.name)
 		}
 	}
 }

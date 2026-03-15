@@ -10,13 +10,13 @@ func TestKingAttackCounts(t *testing.T) {
 	table := GetKingMoves()
 	tests := []struct {
 		name     string
-		square   int
+		square   board.Square
 		expected int
 	}{
 
-		{"Corner (a1)", 0, 3},
-		{"Edge (a2)", 8, 5},
-		{"Center (d4)", 27, 8},
+		{"Corner (a1)", board.A1, 3},
+		{"Edge (a2)", board.A2, 5},
+		{"Center (d4)", board.D4, 8},
 	}
 
 	for _, tt := range tests {
@@ -32,13 +32,13 @@ func TestKingWrapArounds(t *testing.T) {
 
 	tests := []struct {
 		name           string
-		square         int
+		square         board.Square
 		forbiddenMasks board.Bitboard
 	}{
-		{"a1", 0, board.FileHMask},
-		{"a4", 24, board.FileHMask},
-		{"h1", 7, board.FileAMask},
-		{"h8", 63, board.FileAMask},
+		{"a1", board.A1, board.FileHMask},
+		{"a4", board.A4, board.FileHMask},
+		{"h1", board.H1, board.FileAMask},
+		{"h8", board.H8, board.FileAMask},
 	}
 
 	for _, tt := range tests {

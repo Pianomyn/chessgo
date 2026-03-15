@@ -9,11 +9,11 @@ func TestBitboardManipulation(t *testing.T) {
 	cases := []struct {
 		square Square
 	}{
-		{0},
-		{7},
-		{56},
-		{63},
-		{32},
+		{A1},
+		{H1},
+		{A8},
+		{H8},
+		{A5},
 	}
 
 	for _, c := range cases {
