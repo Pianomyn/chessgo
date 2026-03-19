@@ -14,11 +14,11 @@ func TestKnightAttackCounts(t *testing.T) {
 		square   board.Square
 		expected int
 	}{
-		{"Corner (a1)", board.A1, 2},
-		{"Edge (a2)", board.A2, 3},
-		{"Near Edge (b2)", board.B2, 4},
-		{"Outer Ring (c2)", board.C2, 6},
-		{"Center (d4)", board.D4, 8},
+		{"Corner (A1)", board.A1, 2},
+		{"Edge (A2)", board.A2, 3},
+		{"Near Edge (B2)", board.B2, 4},
+		{"Outer Ring (C2)", board.C2, 6},
+		{"Center (D4)", board.D4, 8},
 	}
 
 	for _, tt := range tests {
@@ -37,10 +37,10 @@ func TestKnightWrapArounds(t *testing.T) {
 		square         board.Square
 		forbiddenMasks board.Bitboard
 	}{
-		{"a1", board.A1, board.FileGMask | board.FileHMask},
-		{"b1", board.B1, board.FileHMask},
-		{"h8", board.H8, board.FileAMask | board.FileBMask},
-		{"g8", board.G8, board.FileAMask},
+		{"A1", board.A1, board.FileGMask | board.FileHMask},
+		{"B1", board.B1, board.FileHMask},
+		{"H8", board.H8, board.FileAMask | board.FileBMask},
+		{"G8", board.G8, board.FileAMask},
 	}
 
 	for _, tt := range tests {

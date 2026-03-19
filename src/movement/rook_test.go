@@ -14,10 +14,10 @@ func TestRookMovement(t *testing.T) {
 		expected board.Bitboard
 	}{
 
-		{"a1", board.A1, (board.FileAMask | board.Rank1Mask).Clear(board.A1)},
-		{"a2", board.A2, (board.FileAMask | board.Rank2Mask).Clear(board.A2)},
-		{"b2", board.B2, (board.FileBMask | board.Rank2Mask).Clear(board.B2)},
-		{"d4", board.D4, (board.FileDMask | board.Rank4Mask).Clear(board.D4)},
+		{"A1", board.A1, (board.FileAMask | board.Rank1Mask).Clear(board.A1)},
+		{"A2", board.A2, (board.FileAMask | board.Rank2Mask).Clear(board.A2)},
+		{"B2", board.B2, (board.FileBMask | board.Rank2Mask).Clear(board.B2)},
+		{"D4", board.D4, (board.FileDMask | board.Rank4Mask).Clear(board.D4)},
 	}
 
 	for _, tt := range tests {

@@ -14,9 +14,9 @@ func TestKingAttackCounts(t *testing.T) {
 		expected int
 	}{
 
-		{"Corner (a1)", board.A1, 3},
-		{"Edge (a2)", board.A2, 5},
-		{"Center (d4)", board.D4, 8},
+		{"Corner (A1)", board.A1, 3},
+		{"Edge (A2)", board.A2, 5},
+		{"Center (D4)", board.D4, 8},
 	}
 
 	for _, tt := range tests {
@@ -35,10 +35,10 @@ func TestKingWrapArounds(t *testing.T) {
 		square         board.Square
 		forbiddenMasks board.Bitboard
 	}{
-		{"a1", board.A1, board.FileHMask},
-		{"a4", board.A4, board.FileHMask},
-		{"h1", board.H1, board.FileAMask},
-		{"h8", board.H8, board.FileAMask},
+		{"A1", board.A1, board.FileHMask},
+		{"A4", board.A4, board.FileHMask},
+		{"H1", board.H1, board.FileAMask},
+		{"H8", board.H8, board.FileAMask},
 	}
 
 	for _, tt := range tests {
