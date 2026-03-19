@@ -41,6 +41,8 @@ func PrintAllMoves(piece board.Piece) {
 		allMoves = GetRookMoves()
 	case board.Bishop:
 		allMoves = GetBishopMoves()
+	case board.Queen:
+		allMoves = GetQueenMoves()
 	default:
 		panic("Invalid Piece")
 	}
