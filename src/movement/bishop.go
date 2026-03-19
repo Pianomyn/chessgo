@@ -1,6 +1,9 @@
 package movement
 
-import "chessgo/board"
+import (
+	"chessgo/board"
+	"chessgo/movement/movement_utility"
+)
 
 func GetBishopMoves() []board.Bitboard {
 	// O(n^2), could optimize
@@ -13,19 +16,19 @@ func GetBishopMoves() []board.Bitboard {
 		sw := currentBit
 		for ne != 0 || nw != 0 || se != 0 || sw != 0 {
 			if ne != 0 {
-				ne = (ne << NE) & board.NotFileAMask
+				ne = (ne << movement_utility.NE) & board.NotFileAMask
 				bishopMoves[i] |= ne
 			}
 			if nw != 0 {
-				nw = (nw << NW) & board.NotFileHMask
+				nw = (nw << movement_utility.NW) & board.NotFileHMask
 				bishopMoves[i] |= nw
 			}
 			if se != 0 {
-				se = (se >> -SE) & board.NotFileAMask
+				se = (se >> -movement_utility.SE) & board.NotFileAMask
 				bishopMoves[i] |= se
 			}
 			if sw != 0 {
-				sw = (sw >> -SW) & board.NotFileHMask
+				sw = (sw >> -movement_utility.SW) & board.NotFileHMask
 				bishopMoves[i] |= sw
 			}
 		}

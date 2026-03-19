@@ -1,4 +1,4 @@
-package movement
+package movement_utility
 
 const (
 	N  int8 = 8

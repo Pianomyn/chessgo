@@ -1,8 +1,9 @@
 // https://www.chessprogramming.org/Knight_Pattern
-package movement
+package main
 
 import (
 	"chessgo/board"
+	"chessgo/movement"
 	"fmt"
 )
 
@@ -34,15 +35,15 @@ func PrintAllMoves(piece board.Piece) {
 	var allMoves []board.Bitboard
 	switch piece {
 	case board.King:
-		allMoves = GetKingMoves()
+		allMoves = movement.GetKingMoves()
 	case board.Knight:
-		allMoves = GetKnightMoves()
+		allMoves = movement.GetKnightMoves()
 	case board.Rook:
-		allMoves = GetRookMoves()
+		allMoves = movement.GetRookMoves()
 	case board.Bishop:
-		allMoves = GetBishopMoves()
+		allMoves = movement.GetBishopMoves()
 	case board.Queen:
-		allMoves = GetQueenMoves()
+		allMoves = movement.GetQueenMoves()
 	default:
 		panic("Invalid Piece")
 	}
