@@ -13,7 +13,7 @@ func GetPawnPushes(side board.Side) []board.Bitboard {
 			if currentBit&(board.Rank1Mask|board.Rank8Mask) != 0 {
 				continue
 			} else if currentBit&board.Rank2Mask != 0 {
-				pushes[i] |= currentBit<<movement_utility.N | currentBit<<movement_utility.N*2
+				pushes[i] |= currentBit<<movement_utility.N | currentBit<<(movement_utility.N*2)
 			} else {
 				pushes[i] |= currentBit << movement_utility.N
 			}
@@ -21,7 +21,7 @@ func GetPawnPushes(side board.Side) []board.Bitboard {
 			if currentBit&(board.Rank1Mask|board.Rank8Mask) != 0 {
 				continue
 			} else if currentBit&board.Rank7Mask != 0 {
-				pushes[i] |= currentBit>>-movement_utility.S | currentBit>>-movement_utility.S*2
+				pushes[i] |= currentBit>>-movement_utility.S | currentBit>>-(movement_utility.S*2)
 			} else {
 				pushes[i] |= currentBit >> -movement_utility.S
 			}
