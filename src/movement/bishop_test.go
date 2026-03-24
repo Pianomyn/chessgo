@@ -7,7 +7,7 @@ import (
 )
 
 func TestBishopAttackCounts(t *testing.T) {
-	table := GetBishopMoves()
+	table := GetBishopAttacks()
 	tests := []struct {
 		name     string
 		square   board.Square
@@ -33,7 +33,7 @@ func TestBishopAttackCounts(t *testing.T) {
 }
 
 func TestBishopWraparounds(t *testing.T) {
-	table := GetBishopMoves()
+	table := GetBishopAttacks()
 
 	tests := []struct {
 		name      string

@@ -35,15 +35,15 @@ func PrintAllMoves(piece board.Piece) {
 	var allMoves []board.Bitboard
 	switch piece {
 	case board.King:
-		allMoves = movement.GetKingMoves()
+		allMoves = movement.GetKingAttacks()
 	case board.Knight:
-		allMoves = movement.GetKnightMoves()
+		allMoves = movement.GetKnightAttacks()
 	case board.Rook:
-		allMoves = movement.GetRookMoves()
+		allMoves = movement.GetRookAttacks()
 	case board.Bishop:
-		allMoves = movement.GetBishopMoves()
+		allMoves = movement.GetBishopAttacks()
 	case board.Queen:
-		allMoves = movement.GetQueenMoves()
+		allMoves = movement.GetQueenAttacks()
 	default:
 		panic("Invalid Piece")
 	}

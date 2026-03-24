@@ -7,7 +7,7 @@ import (
 )
 
 func TestRookMovement(t *testing.T) {
-	table := GetRookMoves()
+	table := GetRookAttacks()
 	tests := []struct {
 		name     string
 		square   board.Square

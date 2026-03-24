@@ -2,7 +2,7 @@ package movement
 
 import "chessgo/board"
 
-func GetRookMoves() []board.Bitboard {
+func GetRookAttacks() []board.Bitboard {
 	orthogonal := make([]board.Bitboard, 64)
 
 	for i := 0; i < 64; i++ {

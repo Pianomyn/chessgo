@@ -5,7 +5,7 @@ import (
 	"chessgo/movement/movement_utility"
 )
 
-func GetBishopMoves() []board.Bitboard {
+func GetBishopAttacks() []board.Bitboard {
 	// O(n^2), could optimize
 	bishopMoves := make([]board.Bitboard, 64)
 	for i := range bishopMoves {

@@ -2,10 +2,10 @@ package movement
 
 import "chessgo/board"
 
-func GetQueenMoves() []board.Bitboard {
+func GetQueenAttacks() []board.Bitboard {
 	queenMoves := make([]board.Bitboard, 64)
-	rookMoves := GetRookMoves()
-	bishopMoves := GetBishopMoves()
+	rookMoves := GetRookAttacks()
+	bishopMoves := GetBishopAttacks()
 	for i := range queenMoves {
 		queenMoves[i] = bishopMoves[i] | rookMoves[i]
 	}
