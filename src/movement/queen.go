@@ -5,7 +5,7 @@ import "chessgo/board"
 func GetQueenAttackTable() []board.Bitboard {
 	queenAttacks := make([]board.Bitboard, 64)
 	rookAttacks := GetRookAttackTable()
-	bishopAttacks := GetBishopAttackTable()
+	bishopAttacks := GetBishopAttackRays()
 	for i := range queenAttacks {
 		bishopAttacks := bishopAttacks.NE[i] |
 			bishopAttacks.NW[i] |

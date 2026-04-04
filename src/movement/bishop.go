@@ -34,7 +34,16 @@ func GetBishopMoves(cb *board.ChessBoard, attacks BishopRays) []movement_utility
 }
 */
 
-func GetBishopAttackTable() BishopRays {
+func GetBishopAttackTable() []board.Bitboard {
+	attacks := make([]board.Bitboard, 64)
+	rays := GetBishopAttackRays()
+	for i := range attacks {
+		attacks[i] = rays.NE[i] | rays.NW[i] | rays.SE[i] | rays.SW[i]
+	}
+	return attacks
+}
+
+func GetBishopAttackRays() BishopRays {
 	// Individual rays instead of combined so can use lsb/msb per dir
 	// O(n^2), could optimize
 	rays := BishopRays{

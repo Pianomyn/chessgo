@@ -12,52 +12,44 @@ func TestNewChessBoard(t *testing.T) {
 		t.Error("ChessBoard initial side to move should be White")
 	}
 
-	for i := range 8 {
-		offset := Square(i)
-		if !cb.Pieces[White][Pawn].Get(A2 + offset) {
-			t.Error("White pawns have not been placed correctly")
-		}
-		if !cb.Pieces[Black][Pawn].Get(A7 + offset) {
-			t.Error("Black pawns have not been placed correctly")
-		}
-	}
-
-	initialPositions := []struct {
-		colour   Side
-		piece    Piece
-		position Square
+	pieceTests := []struct {
+		pos      Square
+		expected ColouredPiece
 	}{
-		// Knights
-		{White, Knight, B1},
-		{White, Knight, G1},
-		{Black, Knight, B8},
-		{Black, Knight, G8},
-
-		// Bishops
-		{White, Bishop, C1},
-		{White, Bishop, F1},
-		{Black, Bishop, C8},
-		{Black, Bishop, F8},
-
-		// Rooks
-		{White, Rook, A1},
-		{White, Rook, H1},
-		{Black, Rook, A8},
-		{Black, Rook, H8},
-
-		// Rooks
-		{White, Queen, D1},
-		{Black, Queen, D8},
-
-		// Rooks
-		{White, King, E1},
-		{Black, King, E8},
+		{A1, WhiteRook}, {B1, WhiteKnight}, {C1, WhiteBishop}, {D1, WhiteQueen},
+		{E1, WhiteKing}, {F1, WhiteBishop}, {G1, WhiteKnight}, {H1, WhiteRook},
+		{A8, BlackRook}, {B8, BlackKnight}, {C8, BlackBishop}, {D8, BlackQueen},
+		{E8, BlackKing}, {F8, BlackBishop}, {G8, BlackKnight}, {H8, BlackRook},
+	}
+	for i := 0; i < 8; i++ {
+		pieceTests = append(pieceTests,
+			struct {
+				pos      Square
+				expected ColouredPiece
+			}{A2 + Square(i), WhitePawn},
+			struct {
+				pos      Square
+				expected ColouredPiece
+			}{A7 + Square(i), BlackPawn},
+		)
 	}
 
-	for _, c := range initialPositions {
-		t.Run(fmt.Sprintf("Position %v", c.position), func(t *testing.T) {
-			if !cb.Pieces[c.colour][c.piece].Get(c.position) || !cb.Colours[c.colour].Get(c.position) {
-				t.Errorf("Position %d should contain %d %d", c.position, c.colour, c.piece)
+	for _, tt := range pieceTests {
+		t.Run(fmt.Sprintf("Square_%v", tt.pos), func(t *testing.T) {
+			if cb.Mailbox[tt.pos] != tt.expected {
+				t.Errorf("Mailbox at %v: expected %v, got %v", tt.pos, tt.expected, cb.Mailbox[tt.pos])
+			}
+
+			if tt.expected != NoPiece {
+				side := Side(uint8(tt.expected) / 6)
+				piece := Piece(uint8(tt.expected) % 6)
+
+				if !cb.Pieces[side][piece].Get(tt.pos) {
+					t.Errorf("Bitboard for %v missing at %v", piece, tt.pos)
+				}
+				if !cb.Colours[side].Get(tt.pos) {
+					t.Errorf("Colour bitboard for %v missing at %v", side, tt.pos)
+				}
 			}
 		})
 	}

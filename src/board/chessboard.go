@@ -1,5 +1,10 @@
 package board
 
+import (
+	"fmt"
+	"math/bits"
+)
+
 type Side uint8
 type Piece uint8
 type ColouredPiece uint8
@@ -16,8 +21,8 @@ func (s Side) String() string {
 	return "Black"
 }
 
-func (s Side) changeSide() Side {
-	return s ^ 1
+func (cb *ChessBoard) changeSideToMove() {
+	cb.SideToMove ^= 1
 }
 
 const (
@@ -36,13 +41,18 @@ const (
 	WhiteRook
 	WhiteQueen
 	WhiteKing
-	WhitePawn
-	WhiteKnight
-	WhiteBishop
-	WhiteRook
-	WhiteQueen
-	WhiteKing
+	BlackPawn
+	BlackKnight
+	BlackBishop
+	BlackRook
+	BlackQueen
+	BlackKing
+	NoPiece = 255
 )
+
+func PieceToColouredPiece(p Piece, s Side) ColouredPiece {
+	return ColouredPiece(6*uint8(s) + uint8(p))
+}
 
 func (c Piece) String() string {
 	return []string{
@@ -56,8 +66,8 @@ func (c Piece) String() string {
 }
 
 type ChessBoard struct {
-	Pieces  [2][6]Bitboard // Piece to square
-	Mailbox [64]Piece      // Square to piece
+	Pieces  [2][6]Bitboard    // Piece to square
+	Mailbox [64]ColouredPiece // Square to piece
 
 	Colours    [2]Bitboard
 	Occupied   Bitboard
@@ -100,10 +110,34 @@ func NewChessBoard() *ChessBoard {
 func (cb *ChessBoard) Sync() {
 	cb.Colours[White] = 0
 	cb.Colours[Black] = 0
-	for i := range 6 {
-		cb.Colours[White] |= cb.Pieces[White][i]
-		cb.Colours[Black] |= cb.Pieces[Black][i]
+	for i := range cb.Mailbox {
+		cb.Mailbox[i] = NoPiece
+	}
+
+	for side := White; side <= Black; side++ {
+		for p := Pawn; p <= King; p++ {
+			cb.Colours[side] |= cb.Pieces[side][p]
+
+			instances := cb.Pieces[side][p]
+			for instances > 0 {
+				sq := GetNextPieceSquare(&instances)
+				fmt.Println(sq)
+				cb.Mailbox[sq] = PieceToColouredPiece(p, side)
+			}
+		}
 	}
 
 	cb.Occupied = cb.Colours[White] | cb.Colours[Black]
+}
+
+func GetNextPieceSquare(pieces *Bitboard) Square {
+	/*
+		For a bitboard containing locations of all pieces of a particular type,
+		yield the location of the next piece
+	*/
+
+	lsbIndex := Square(bits.TrailingZeros64(uint64(*pieces)))
+
+	*pieces = pieces.Clear(lsbIndex)
+	return lsbIndex
 }
