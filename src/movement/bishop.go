@@ -12,21 +12,31 @@ type BishopRays struct {
 	SW []board.Bitboard
 }
 
-func GetBishopMoves(cb *board.ChessBoard, attacks BishopRays) board.Bitboard {
+/*
+func GetBishopMoves(cb *board.ChessBoard, attacks BishopRays) []Move {
 	bishops := cb.Pieces[cb.SideToMove][board.Bishop]
 
 	for bishops != 0 {
-		// square := movement_utility.GetNextBitIndex(&bishops)
-		bishops = 0
+		square := movement_utility.GetNextPiece(&bishops)
+
+		neBlockers := attacks.NE[square] & cb.Occupied
+		if neBlockers == 0 {
+			// At least 1 blocker
+			neHit := bits.TrailingZeros64(uint64(neBlockers))
+		} else {
+
+		}
+		nwBlockers := attacks.NE[square] & cb.Occupied
 
 	}
 
 	return board.Bitboard(1)
 }
+*/
 
 func GetBishopAttackTable() BishopRays {
-	// O(n^2), could optimize
 	// Individual rays instead of combined so can use lsb/msb per dir
+	// O(n^2), could optimize
 	rays := BishopRays{
 		NE: make([]board.Bitboard, 64),
 		NW: make([]board.Bitboard, 64),

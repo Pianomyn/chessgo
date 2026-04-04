@@ -5,13 +5,17 @@ import (
 	"math/bits"
 )
 
-func GetNextBitIndex(b *board.Bitboard) int {
-	if *b == 0 {
+func GetNextPiece(pieces *board.Bitboard) int {
+	/*
+		For a bitboard containing locations of all pieces of a particular type,
+		yield the location of the next piece
+	*/
+	if *pieces == 0 {
 		return -1
 	}
 
-	lsbIndex := bits.TrailingZeros64(uint64(*b))
+	lsbIndex := bits.TrailingZeros64(uint64(*pieces))
 
-	b.Clear(board.Square(lsbIndex))
+	pieces.Clear(board.Square(lsbIndex))
 	return lsbIndex
 }
