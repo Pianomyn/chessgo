@@ -3,11 +3,16 @@ package movement
 import "chessgo/board"
 
 func GetQueenAttackTable() []board.Bitboard {
-	queenMoves := make([]board.Bitboard, 64)
-	rookMoves := GetRookAttackTable()
-	bishopMoves := GetBishopAttackTable()
-	for i := range queenMoves {
-		queenMoves[i] = bishopMoves[i] | rookMoves[i]
+	queenAttacks := make([]board.Bitboard, 64)
+	rookAttacks := GetRookAttackTable()
+	bishopAttacks := GetBishopAttackTable()
+	for i := range queenAttacks {
+		bishopAttacks := bishopAttacks.NE[i] |
+			bishopAttacks.NW[i] |
+			bishopAttacks.SW[i] |
+			bishopAttacks.SE[i]
+
+		queenAttacks[i] = bishopAttacks | rookAttacks[i]
 	}
-	return queenMoves
+	return queenAttacks
 }

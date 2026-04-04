@@ -8,11 +8,15 @@ const (
 	Black
 )
 
-func (c Side) String() string {
-	if c == White {
+func (s Side) String() string {
+	if s == White {
 		return "White"
 	}
 	return "Black"
+}
+
+func (s Side) changeSide() Side {
+	return (s + 1) % 2
 }
 
 const (

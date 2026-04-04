@@ -7,7 +7,7 @@ import (
 )
 
 func TestBishopAttackCounts(t *testing.T) {
-	table := GetBishopAttackTable()
+	rays := GetBishopAttackTable()
 	tests := []struct {
 		name     string
 		square   board.Square
@@ -25,7 +25,12 @@ func TestBishopAttackCounts(t *testing.T) {
 	}
 
 	for _, tt := range tests {
-		got := bits.OnesCount64(uint64(table[tt.square]))
+		combined := rays.NE[tt.square] |
+			rays.NW[tt.square] |
+			rays.SE[tt.square] |
+			rays.SW[tt.square]
+
+		got := bits.OnesCount64(uint64(combined))
 		if got != tt.expected {
 			t.Errorf("%s: expected %d attacks, got %d", tt.name, tt.expected, got)
 		}
@@ -33,7 +38,7 @@ func TestBishopAttackCounts(t *testing.T) {
 }
 
 func TestBishopWraparounds(t *testing.T) {
-	table := GetBishopAttackTable()
+	rays := GetBishopAttackTable()
 
 	tests := []struct {
 		name      string
@@ -44,37 +49,42 @@ func TestBishopWraparounds(t *testing.T) {
 			name:   "H-File NE/SE Wrap",
 			square: board.H4,
 			forbidden: []board.Square{
-				board.A5, // Wrapped NE from H4
-				board.A3, // Wrapped SE from H4
+				board.A5,
+				board.A3,
 			},
 		},
 		{
 			name:   "A-File NW/SW Wrap",
 			square: board.A4,
 			forbidden: []board.Square{
-				board.H5, // Wrapped NW from A4
-				board.H3, // Wrapped SW from A4
+				board.H5,
+				board.H3,
 			},
 		},
 		{
 			name:   "H1 Corner Wrap",
 			square: board.H1,
 			forbidden: []board.Square{
-				board.A2, // Wrapped NE from H1
+				board.A2,
 			},
 		},
 		{
 			name:   "A8 Corner Wrap",
 			square: board.A8,
 			forbidden: []board.Square{
-				board.H7, // Wrapped SW from A8
+				board.H7,
 			},
 		},
 	}
 
 	for _, tt := range tests {
+		combined := rays.NE[tt.square] |
+			rays.NW[tt.square] |
+			rays.SE[tt.square] |
+			rays.SW[tt.square]
+
 		for _, f := range tt.forbidden {
-			if (table[tt.square] & (board.Bitboard(1) << f)) != 0 {
+			if (combined & (board.Bitboard(1) << f)) != 0 {
 				t.Errorf("%s: square %d erroneously included (wraparound)", tt.name, f)
 			}
 		}
