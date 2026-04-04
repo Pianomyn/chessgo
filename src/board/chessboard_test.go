@@ -84,7 +84,4 @@ func TestSyncBasic(t *testing.T) {
 	if cb.Occupied.Get(A1) || !cb.Occupied.Get(A3) || !cb.Occupied.Get(H8) {
 		t.Errorf("Occupied bitboard incorrect")
 	}
-	if !cb.Empty.Get(A1) || cb.Empty.Get(A3) || cb.Empty.Get(H8) {
-		t.Errorf("Empty bitboard incorrect")
-	}
 }

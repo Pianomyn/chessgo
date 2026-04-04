@@ -40,7 +40,6 @@ type ChessBoard struct {
 	Colours [2]Bitboard
 
 	Occupied   Bitboard
-	Empty      Bitboard
 	SideToMove Side
 }
 
@@ -86,5 +85,4 @@ func (cb *ChessBoard) Sync() {
 	}
 
 	cb.Occupied = cb.Colours[White] | cb.Colours[Black]
-	cb.Empty = ^cb.Occupied
 }
