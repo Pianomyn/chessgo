@@ -1,1 +1,8 @@
-- 15/03/26: LLM suggested rook ray generations could wrap around like king/knight
+- Found chess programming wiki (catered to more experienced audience, assumes some knowledge)
+- High level understanding of approach with LLM (move gen, search, eval)
+- Chat with LLM about main bottlenecks that tend to pop up in chess engines (C++ and Go)
+    - Search space is massive, move ordering (sequence of searches) matters alot
+    - Cache misses (keep data flat)
+    - Go
+        - Go Garbage collection causes stutters
+- LLM suggested rook ray generations could wrap around like king/knight

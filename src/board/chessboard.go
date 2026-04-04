@@ -16,7 +16,7 @@ func (s Side) String() string {
 }
 
 func (s Side) changeSide() Side {
-	return (s + 1) % 2
+	return s ^ 1
 }
 
 const (
@@ -29,13 +29,13 @@ const (
 )
 
 func (c Piece) String() string {
-	return map[Piece]string{
-		Pawn:   "Pawn",
-		Knight: "Knight",
-		Bishop: "Bishop",
-		Rook:   "Rook",
-		Queen:  "Queen",
-		King:   "King",
+	return []string{
+		"Pawn",
+		"Knight",
+		"Bishop",
+		"Rook",
+		"Queen",
+		"King",
 	}[c]
 }
 
