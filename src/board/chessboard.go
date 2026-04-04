@@ -2,6 +2,7 @@ package board
 
 type Side uint8
 type Piece uint8
+type ColouredPiece uint8
 
 const (
 	White Side = iota
@@ -28,6 +29,21 @@ const (
 	King
 )
 
+const (
+	WhitePawn ColouredPiece = iota
+	WhiteKnight
+	WhiteBishop
+	WhiteRook
+	WhiteQueen
+	WhiteKing
+	WhitePawn
+	WhiteKnight
+	WhiteBishop
+	WhiteRook
+	WhiteQueen
+	WhiteKing
+)
+
 func (c Piece) String() string {
 	return []string{
 		"Pawn",
@@ -40,9 +56,10 @@ func (c Piece) String() string {
 }
 
 type ChessBoard struct {
-	Pieces  [2][6]Bitboard
-	Colours [2]Bitboard
+	Pieces  [2][6]Bitboard // Piece to square
+	Mailbox [64]Piece      // Square to piece
 
+	Colours    [2]Bitboard
 	Occupied   Bitboard
 	SideToMove Side
 }

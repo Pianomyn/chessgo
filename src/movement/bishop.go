@@ -13,7 +13,7 @@ type BishopRays struct {
 }
 
 /*
-func GetBishopMoves(cb *board.ChessBoard, attacks BishopRays) []Move {
+func GetBishopMoves(cb *board.ChessBoard, attacks BishopRays) []movement_utility.Move {
 	bishops := cb.Pieces[cb.SideToMove][board.Bishop]
 
 	for bishops != 0 {
