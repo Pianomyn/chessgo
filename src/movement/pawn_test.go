@@ -7,8 +7,8 @@ import (
 )
 
 func TestPawnPushCounts(t *testing.T) {
-	whitePushes := GetPawnPushes(board.White)
-	blackPushes := GetPawnPushes(board.Black)
+	whitePushes := GetPawnPushTable(board.White)
+	blackPushes := GetPawnPushTable(board.Black)
 
 	tests := []struct {
 		name     string
@@ -38,8 +38,8 @@ func TestPawnPushCounts(t *testing.T) {
 }
 
 func TestPawnAttackCounts(t *testing.T) {
-	whiteTable := GetPawnAttacks(board.White)
-	blackTable := GetPawnAttacks(board.Black)
+	whiteTable := GetPawnAttackTable(board.White)
+	blackTable := GetPawnAttackTable(board.Black)
 
 	tests := []struct {
 		name     string

@@ -7,7 +7,7 @@ import (
 )
 
 func TestKnightAttackCounts(t *testing.T) {
-	table := GetKnightAttacks()
+	table := GetKnightAttackTable()
 
 	tests := []struct {
 		name     string
@@ -30,7 +30,7 @@ func TestKnightAttackCounts(t *testing.T) {
 }
 
 func TestKnightWrapArounds(t *testing.T) {
-	table := GetKnightAttacks()
+	table := GetKnightAttackTable()
 
 	tests := []struct {
 		name           string

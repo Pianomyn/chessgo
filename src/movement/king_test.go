@@ -7,7 +7,7 @@ import (
 )
 
 func TestKingAttackCounts(t *testing.T) {
-	table := GetKingAttacks()
+	table := GetKingAttackTable()
 	tests := []struct {
 		name     string
 		square   board.Square
@@ -28,7 +28,7 @@ func TestKingAttackCounts(t *testing.T) {
 }
 
 func TestKingWrapArounds(t *testing.T) {
-	table := GetKingAttacks()
+	table := GetKingAttackTable()
 
 	tests := []struct {
 		name           string

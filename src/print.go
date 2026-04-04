@@ -35,13 +35,13 @@ func PrintAllMoves(piece board.Piece) {
 	var allMoves []board.Bitboard
 	switch piece {
 	case board.King:
-		allMoves = movement.GetKingAttacks()
+		allMoves = movement.GetKingAttackTable()
 	case board.Knight:
-		allMoves = movement.GetKnightAttacks()
+		allMoves = movement.GetKnightAttackTable()
 	case board.Rook:
-		allMoves = movement.GetRookAttacks()
+		allMoves = movement.GetRookAttackTable()
 	case board.Bishop:
-		allMoves = movement.GetBishopAttacks()
+		allMoves = movement.GetBishopAttackTable()
 	case board.Queen:
 		allMoves = movement.GetQueenAttacks()
 	default:

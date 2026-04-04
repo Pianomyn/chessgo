@@ -5,7 +5,7 @@ import (
 	"chessgo/movement/movement_utility"
 )
 
-func GetPawnPushes(side board.Side) []board.Bitboard {
+func GetPawnPushTable(side board.Side) []board.Bitboard {
 	pushes := make([]board.Bitboard, 64)
 	for i := range pushes {
 		currentBit := board.Bitboard(1) << i
@@ -30,7 +30,7 @@ func GetPawnPushes(side board.Side) []board.Bitboard {
 	return pushes
 }
 
-func GetPawnAttacks(side board.Side) []board.Bitboard {
+func GetPawnAttackTable(side board.Side) []board.Bitboard {
 	attacks := make([]board.Bitboard, 64)
 	for i := range attacks {
 		currentBit := board.Bitboard(1) << i

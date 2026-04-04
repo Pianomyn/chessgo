@@ -5,7 +5,7 @@ import (
 	"chessgo/movement/movement_utility"
 )
 
-func GetKnightAttacks() []board.Bitboard {
+func GetKnightAttackTable() []board.Bitboard {
 	knightAttacks := make([]board.Bitboard, 64)
 	for i := range knightAttacks {
 		bit := board.Bitboard(1) << i
