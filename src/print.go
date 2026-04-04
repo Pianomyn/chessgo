@@ -43,7 +43,7 @@ func PrintAllMoves(piece board.Piece) {
 	case board.Bishop:
 		allMoves = movement.GetBishopAttackTable()
 	case board.Queen:
-		allMoves = movement.GetQueenAttacks()
+		allMoves = movement.GetQueenAttackTable()
 	default:
 		panic("Invalid Piece")
 	}

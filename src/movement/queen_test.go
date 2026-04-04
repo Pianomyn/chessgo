@@ -7,7 +7,7 @@ import (
 )
 
 func TestQueenAttackCounts(t *testing.T) {
-	table := GetQueenAttacks()
+	table := GetQueenAttackTable()
 	tests := []struct {
 		name     string
 		square   board.Square

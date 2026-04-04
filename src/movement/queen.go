@@ -2,7 +2,7 @@ package movement
 
 import "chessgo/board"
 
-func GetQueenAttacks() []board.Bitboard {
+func GetQueenAttackTable() []board.Bitboard {
 	queenMoves := make([]board.Bitboard, 64)
 	rookMoves := GetRookAttackTable()
 	bishopMoves := GetBishopAttackTable()
