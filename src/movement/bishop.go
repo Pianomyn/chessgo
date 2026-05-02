@@ -3,7 +3,6 @@ package movement
 import (
 	"chessgo/board"
 	"chessgo/movement/movement_utility"
-	"math/bits"
 )
 
 type BishopRays struct {
@@ -13,20 +12,36 @@ type BishopRays struct {
 	SW []board.Bitboard
 }
 
-func GetBishopMoves(cb *board.ChessBoard, attacks BishopRays) []movement_utility.Move {
+func GetBishopMoves(cb *board.ChessBoard, rays BishopRays) []movement_utility.Move {
 	var moves []movement_utility.Move
 	bishops := cb.Pieces[cb.SideToMove][board.Bishop]
 	friends := cb.Colours[cb.SideToMove]
-	enemies := cb.Colours[cb.SideToMove ^ 1]
+	occupied := cb.Occupied
 
 	for bishops != 0 {
 		square := board.GetNextPieceSquare(&bishops)
+		sqIdx := int(square)
 
+		targets := movement_utility.RayMoves(rays.NE[sqIdx], rays.NE, occupied, true) |
+			movement_utility.RayMoves(rays.NW[sqIdx], rays.NW, occupied, true) |
+			movement_utility.RayMoves(rays.SE[sqIdx], rays.SE, occupied, false) |
+			movement_utility.RayMoves(rays.SW[sqIdx], rays.SW, occupied, false)
 
+		targets &^= friends // Can't capture own pieces
+
+		for targets != 0 {
+			target := board.GetNextPieceSquare(&targets)
+			moves = append(moves, movement_utility.Move{
+				Source:      square,
+				Target:      target,
+				SourcePiece: board.Bishop,
+			})
+		}
 	}
 
 	return moves
 }
+
 
 func GetBishopAttackTable() []board.Bitboard {
 	attacks := make([]board.Bitboard, 64)
