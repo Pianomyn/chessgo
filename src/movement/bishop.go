@@ -3,6 +3,7 @@ package movement
 import (
 	"chessgo/board"
 	"chessgo/movement/movement_utility"
+	"math/bits"
 )
 
 type BishopRays struct {
@@ -12,27 +13,20 @@ type BishopRays struct {
 	SW []board.Bitboard
 }
 
-/*
 func GetBishopMoves(cb *board.ChessBoard, attacks BishopRays) []movement_utility.Move {
+	var moves []movement_utility.Move
 	bishops := cb.Pieces[cb.SideToMove][board.Bishop]
+	friends := cb.Colours[cb.SideToMove]
+	enemies := cb.Colours[cb.SideToMove ^ 1]
 
 	for bishops != 0 {
-		square := movement_utility.GetNextPiece(&bishops)
+		square := board.GetNextPieceSquare(&bishops)
 
-		neBlockers := attacks.NE[square] & cb.Occupied
-		if neBlockers == 0 {
-			// At least 1 blocker
-			neHit := bits.TrailingZeros64(uint64(neBlockers))
-		} else {
-
-		}
-		nwBlockers := attacks.NE[square] & cb.Occupied
 
 	}
 
-	return board.Bitboard(1)
+	return moves
 }
-*/
 
 func GetBishopAttackTable() []board.Bitboard {
 	attacks := make([]board.Bitboard, 64)
