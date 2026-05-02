@@ -6,3 +6,5 @@
     - Go
         - Go Garbage collection causes stutters
 - LLM suggested rook ray generations could wrap around like king/knight
+- Ray move gen given rays impl (manually checking each square if blocker). Used LLM for suggestion
+about TrailingZeroes/LeadingZeroes (LSB/MSB) trick to find first blocker

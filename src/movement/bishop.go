@@ -27,7 +27,7 @@ func GetBishopMoves(cb *board.ChessBoard, rays BishopRays) []movement_utility.Mo
 			movement_utility.RayMoves(rays.SE[sqIdx], rays.SE, occupied, false) |
 			movement_utility.RayMoves(rays.SW[sqIdx], rays.SW, occupied, false)
 
-		targets &^= friends // Can't capture own pieces
+		targets &^= friends
 
 		for targets != 0 {
 			target := board.GetNextPieceSquare(&targets)

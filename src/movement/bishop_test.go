@@ -6,6 +6,13 @@ import (
 	"testing"
 )
 
+// Move tests
+func TestBishopMoves(t *testing.T) {
+
+}
+
+
+// Ray tests
 func TestBishopAttackCounts(t *testing.T) {
 	rays := GetBishopAttackRays()
 	tests := []struct {
