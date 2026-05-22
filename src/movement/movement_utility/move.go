@@ -21,6 +21,7 @@ func RayMoves(ray board.Bitboard, allRays []board.Bitboard, occupied board.Bitbo
 	if positive {
 		first = bits.TrailingZeros64(uint64(blockers))
 	} else {
+		// Counting from MSB downwards, flip/convert to get Little-Endian bit
 		first = 63 - bits.LeadingZeros64(uint64(blockers))
 	}
 
