@@ -12,7 +12,8 @@ type BishopRays struct {
 	SW []board.Bitboard
 }
 
-func GetBishopMoves(cb *board.ChessBoard, rays BishopRays) []movement_utility.Move {
+func GetBishopMoves(cb *board.ChessBoard) []movement_utility.Move {
+	rays := GetBishopAttackRays()
 	var moves []movement_utility.Move
 	bishops := cb.Pieces[cb.SideToMove][board.Bishop]
 	friends := cb.Colours[cb.SideToMove]
@@ -27,7 +28,7 @@ func GetBishopMoves(cb *board.ChessBoard, rays BishopRays) []movement_utility.Mo
 			movement_utility.RayMoves(rays.SE[sqIdx], rays.SE, occupied, false) |
 			movement_utility.RayMoves(rays.SW[sqIdx], rays.SW, occupied, false)
 
-		targets &^= friends
+		targets &^= friends // Can't capture own pieces
 
 		for targets != 0 {
 			target := board.GetNextPieceSquare(&targets)
