@@ -120,4 +120,6 @@ const (
 	F8
 	G8
 	H8
+
+	NoSquare Square = 64 // Sentinel for "no en passant square"
 )

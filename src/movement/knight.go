@@ -21,9 +21,10 @@ func GetKnightMoves(cb *board.ChessBoard) []movement_utility.Move {
 			moves = append(
 				moves,
 				movement_utility.Move{
-					Source: source,
-					Target: target,
-					SourcePiece: board.Knight,
+					Source:        source,
+					Target:        target,
+					SourcePiece:   board.PieceToColouredPiece(board.Knight, cb.SideToMove),
+					CapturedPiece: cb.Mailbox[target],
 				},
 			)
 		}

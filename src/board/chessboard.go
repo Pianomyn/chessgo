@@ -32,6 +32,7 @@ const (
 	Rook
 	Queen
 	King
+	NoPiece = 255
 )
 
 const (
@@ -47,7 +48,7 @@ const (
 	BlackRook
 	BlackQueen
 	BlackKing
-	NoPiece = 255
+	NoColouredPiece = 255
 )
 
 func PieceToColouredPiece(p Piece, s Side) ColouredPiece {
@@ -65,18 +66,34 @@ func (c Piece) String() string {
 	}[c]
 }
 
+type CastlingRights struct {
+	WhiteKingside  bool
+	WhiteQueenside bool
+	BlackKingside  bool
+	BlackQueenside bool
+}
+
 type ChessBoard struct {
 	Pieces  [2][6]Bitboard    // Piece to square
 	Mailbox [64]ColouredPiece // Square to piece
 
-	Colours    [2]Bitboard
-	Occupied   Bitboard
-	SideToMove Side
+	Colours         [2]Bitboard
+	Occupied        Bitboard
+	SideToMove      Side
+	CastlingRights  CastlingRights
+	EnPassantSquare Square
 }
 
 func NewChessBoard() *ChessBoard {
 	cb := &ChessBoard{
 		SideToMove: White,
+		CastlingRights: CastlingRights{
+			WhiteKingside:  true,
+			WhiteQueenside: true,
+			BlackKingside:  true,
+			BlackQueenside: true,
+		},
+		EnPassantSquare: NoSquare,
 	}
 
 	// Pawns
@@ -111,7 +128,7 @@ func (cb *ChessBoard) Sync() {
 	cb.Colours[White] = 0
 	cb.Colours[Black] = 0
 	for i := range cb.Mailbox {
-		cb.Mailbox[i] = NoPiece
+		cb.Mailbox[i] = NoColouredPiece
 	}
 
 	for side := White; side <= Black; side++ {

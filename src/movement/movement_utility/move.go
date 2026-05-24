@@ -28,10 +28,19 @@ func RayMoves(ray board.Bitboard, allRays []board.Bitboard, occupied board.Bitbo
 	return ray ^ allRays[first]
 }
 
-type Move struct {
-	Source      board.Square
-	Target      board.Square
-	SourcePiece board.Piece
+type MoveFlags struct {
+	DoublePush  bool
+	EnPassant   bool
+	CastleKing  bool
+	CastleQueen bool
+	Promotion   bool
+}
 
-	// Promotion, castling, en passant etc can be handled later
+type Move struct {
+	Source        board.Square
+	Target        board.Square
+	SourcePiece   board.ColouredPiece
+	CapturedPiece board.ColouredPiece
+	PromotionTo   board.Piece
+	Flags         MoveFlags
 }

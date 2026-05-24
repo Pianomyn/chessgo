@@ -40,7 +40,7 @@ func TestNewChessBoard(t *testing.T) {
 				t.Errorf("Mailbox at %v: expected %v, got %v", tt.pos, tt.expected, cb.Mailbox[tt.pos])
 			}
 
-			if tt.expected != NoPiece {
+			if tt.expected != NoColouredPiece {
 				side := Side(uint8(tt.expected) / 6)
 				piece := Piece(uint8(tt.expected) % 6)
 

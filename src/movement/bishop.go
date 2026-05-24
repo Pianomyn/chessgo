@@ -32,9 +32,10 @@ func GetBishopMoves(cb *board.ChessBoard) []movement_utility.Move {
 		for targets != 0 {
 			target := board.GetNextPieceSquare(&targets)
 			moves = append(moves, movement_utility.Move{
-				Source:      source,
-				Target:      target,
-				SourcePiece: board.Bishop,
+				Source:        source,
+				Target:        target,
+				SourcePiece:   board.PieceToColouredPiece(board.Bishop, cb.SideToMove),
+				CapturedPiece: cb.Mailbox[target],
 			})
 		}
 	}
