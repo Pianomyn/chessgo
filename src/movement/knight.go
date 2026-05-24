@@ -5,6 +5,32 @@ import (
 	"chessgo/movement/movement_utility"
 )
 
+func GetKnightMoves(cb *board.ChessBoard) []movement_utility.Move {
+	var moves []movement_utility.Move
+	attackTable := GetKnightAttackTable()
+
+	knights := cb.Pieces[cb.SideToMove][board.Knight]
+
+	for knights != 0 {
+		source := board.GetNextPieceSquare(&knights)
+
+		moveBitboard := attackTable[source] &^ cb.Colours[cb.SideToMove]
+		
+		for moveBitboard != 0 {
+			target := board.GetNextPieceSquare(&moveBitboard)
+			moves = append(
+				moves,
+				movement_utility.Move{
+					Source: source,
+					Target: target,
+					SourcePiece: board.Knight,
+				},
+			)
+		}
+	}
+	return moves
+}
+
 func GetKnightAttackTable() []board.Bitboard {
 	knightAttacks := make([]board.Bitboard, 64)
 	for i := range knightAttacks {

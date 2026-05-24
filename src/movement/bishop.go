@@ -20,20 +20,19 @@ func GetBishopMoves(cb *board.ChessBoard) []movement_utility.Move {
 	occupied := cb.Occupied
 
 	for bishops != 0 {
-		square := board.GetNextPieceSquare(&bishops)
-		sqIdx := int(square)
+		source := board.GetNextPieceSquare(&bishops)
 
-		targets := movement_utility.RayMoves(rays.NE[sqIdx], rays.NE, occupied, true) |
-			movement_utility.RayMoves(rays.NW[sqIdx], rays.NW, occupied, true) |
-			movement_utility.RayMoves(rays.SE[sqIdx], rays.SE, occupied, false) |
-			movement_utility.RayMoves(rays.SW[sqIdx], rays.SW, occupied, false)
+		targets := movement_utility.RayMoves(rays.NE[source], rays.NE, occupied, true) |
+			movement_utility.RayMoves(rays.NW[source], rays.NW, occupied, true) |
+			movement_utility.RayMoves(rays.SE[source], rays.SE, occupied, false) |
+			movement_utility.RayMoves(rays.SW[source], rays.SW, occupied, false)
 
-		targets &^= friends // Can't capture own pieces
+		targets &^= friends
 
 		for targets != 0 {
 			target := board.GetNextPieceSquare(&targets)
 			moves = append(moves, movement_utility.Move{
-				Source:      square,
+				Source:      source,
 				Target:      target,
 				SourcePiece: board.Bishop,
 			})
