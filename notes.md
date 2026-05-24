@@ -12,5 +12,5 @@
 - LLM suggested rook ray generations could wrap around like king/knight
 - Ray move gen given rays impl (manually checking each square if blocker). Used LLM for suggestion
 about TrailingZeroes/LeadingZeroes (LSB/MSB) trick to find first blocker
-- For move gen, discussed tradeoffs of Make/Unmake vs copy ChessBoards. Went with copy Chessboards approach initially as more intuitive.
-Plan to optimize later if notice a specific bottleneck.
+- For move gen, discussed tradeoffs of Make/Unmake vs copy ChessBoards.
+Went with copy Chessboards approach initially as more intuitive and better for learning (understand what to optimize through trial/error).
