@@ -138,7 +138,6 @@ func (cb *ChessBoard) Sync() {
 			instances := cb.Pieces[side][p]
 			for instances > 0 {
 				sq := GetNextPieceSquare(&instances)
-				fmt.Println(sq)
 				cb.Mailbox[sq] = PieceToColouredPiece(p, side)
 			}
 		}
